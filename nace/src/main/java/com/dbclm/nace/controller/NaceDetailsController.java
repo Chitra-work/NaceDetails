@@ -13,10 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dbclm.nace.data.entity.NaceDetails;
 import com.dbclm.nace.service.NaceDetailsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/nace")
 public class NaceDetailsController {
+	
+	 private final Logger LOGGER =
+	            LoggerFactory.getLogger(NaceDetailsController.class);
+	
     @Autowired
     private NaceDetailsService naceDetailsService;
 
@@ -24,6 +30,7 @@ public class NaceDetailsController {
     public ResponseEntity<String> saveNaceDetails(@RequestBody NaceDetails naceDetails) {
     	
         naceDetailsService.saveNaceDetails(naceDetails);
+        LOGGER.info("Details are saved successfully");
         return ResponseEntity.ok("NACE data saved successfully.");
     }
 
